@@ -1,5 +1,5 @@
 Name:           ffmpegthumbnailer
-Version:        2.0.1
+Version:        2.0.2
 Release:        1%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
@@ -67,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libffmpegthumbnailer/*.h
 
 %changelog
+* Sun May 16 2010 Magnus Tuominen <magnus.tuominen@gmail.com> 2.0.2-1
+- version bump
+
 * Sat Apr 19 2010 Magnus Tuominen <magnus.tuominen@gmail.com> 2.0.1-1
 - version bump
 - libspatch.patch merged upstream, issue 59
