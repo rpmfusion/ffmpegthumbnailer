@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
-Version:        2.0.4
-Release:        2%{?dist}
+Version:        2.0.5
+Release:        1%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
@@ -33,8 +33,8 @@ chmod -x README INSTALL COPYING AUTHORS
 %build
 %configure --enable-png \
            --enable-jpeg \
-           --disable-static
-
+           --disable-static \
+           --enable-gio 
 
 make %{?_smp_mflags}
 
@@ -67,6 +67,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libffmpegthumbnailer/*.h
 
 %changelog
+* Sun Dec 05 2010 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.5-1
+- version bump
+- enable gio-support
+
 * Sat Aug 21 2010 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.0.4-2
 - rebuilt
 
