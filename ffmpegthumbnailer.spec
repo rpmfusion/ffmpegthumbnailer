@@ -1,5 +1,5 @@
 Name:           ffmpegthumbnailer
-Version:        2.0.5
+Version:        2.0.6
 Release:        1%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
@@ -8,9 +8,12 @@ License:        GPLv2+
 URL:            http://code.google.com/p/ffmpegthumbnailer/
 Source0:        http://ffmpegthumbnailer.googlecode.com/files/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# patch in upstream svn
+# http://code.google.com/p/ffmpegthumbnailer/source/diff?spec=svn228&r=228&format=side&path=/trunk/Makefile.am
+Patch0:         %{name}-libdl.patch
 
 BuildRequires:  ffmpeg-devel, libpng-devel, libjpeg-devel
-BuildRequires:  chrpath
+BuildRequires:  chrpath, automake, autoconf
 
 
 %description
@@ -29,6 +32,7 @@ development package.
 %setup -q
 chmod -x README INSTALL COPYING AUTHORS
 
+%patch0 -p 1 -b .orig
 
 %build
 %configure --enable-png \
@@ -67,6 +71,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libffmpegthumbnailer/*.h
 
 %changelog
+* Fri Jan 04 2011 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.6-1
+- version bump
+- patch libdl link issue
+- add BR: automake and autoconf
+
 * Sun Dec 05 2010 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.5-1
 - version bump
 - enable gio-support
