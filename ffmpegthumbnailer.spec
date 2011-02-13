@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
 Version:        2.0.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
@@ -11,7 +11,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # patch in upstream svn
 # http://code.google.com/p/ffmpegthumbnailer/source/diff?spec=svn228&r=228&format=side&path=/trunk/Makefile.am
 Patch0:         %{name}-libdl.patch
-
+# patch sent upstream
+# https://code.google.com/p/ffmpegthumbnailer/issues/detail?id=83
+Patch1:         %{name}-null.patch
 BuildRequires:  ffmpeg-devel, libpng-devel, libjpeg-devel
 BuildRequires:  chrpath, automake, autoconf
 
@@ -33,6 +35,7 @@ development package.
 chmod -x README INSTALL COPYING AUTHORS
 
 %patch0 -p 1 -b .orig
+%patch1 -p 1 -b .orig
 
 %build
 %configure --enable-png \
@@ -71,6 +74,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libffmpegthumbnailer/*.h
 
 %changelog
+* Sun Feb 13 2011 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.6-2
+- patch NULL reference to make rawhide build
+
 * Fri Jan 04 2011 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.6-1
 - version bump
 - patch libdl link issue
