@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
 Version:        2.0.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
@@ -74,6 +74,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libffmpegthumbnailer/*.h
 
 %changelog
+* Mon Sep 26 2011 Nicolas Chauvet <kwizart@gmail.com> - 2.0.6-3
+- Rebuilt for FFmpeg-0.8
+
 * Sun Feb 13 2011 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.6-2
 - patch NULL reference to make rawhide build
 
