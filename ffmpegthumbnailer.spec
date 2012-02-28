@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
 Version:        2.0.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
@@ -71,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libffmpegthumbnailer/*.h
 
 %changelog
+* Tue Feb 28 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.0.7-3
+- Rebuilt for x264/FFmpeg
+
 * Wed Feb 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.0.7-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
