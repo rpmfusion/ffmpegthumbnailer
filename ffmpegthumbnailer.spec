@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
-Version:        2.0.7
-Release:        5%{?dist}
+Version:        2.0.8
+Release:        1%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
@@ -8,12 +8,7 @@ License:        GPLv2+
 URL:            http://code.google.com/p/ffmpegthumbnailer/
 Source0:        http://ffmpegthumbnailer.googlecode.com/files/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-# patch in upstream svn
-# http://code.google.com/p/ffmpegthumbnailer/source/diff?spec=svn228&r=228&format=side&path=/trunk/Makefile.am
-# Patch0:         %%{name}-libdl.patch
-# patch sent upstream
-# https://code.google.com/p/ffmpegthumbnailer/issues/detail?id=83
-# Patch1:         %%{name}-null.patch
+
 BuildRequires:  ffmpeg-devel, libpng-devel, libjpeg-devel
 BuildRequires:  chrpath, automake, autoconf
 
@@ -24,7 +19,7 @@ This video thumbnailer can be used to create thumbnails for your video files.
 %package devel
 Summary:        Headers and libraries for building apps that use ffmpegthumbnailer
 Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 This video thumbnailer can be used to create thumbnails for your video files,
@@ -38,7 +33,8 @@ chmod -x README INSTALL COPYING AUTHORS
 %configure --enable-png \
            --enable-jpeg \
            --disable-static \
-           --enable-gio 
+           --enable-gio \
+	   --enable-thumbnailer
 
 make %{?_smp_mflags}
 
@@ -49,12 +45,11 @@ make install DESTDIR=$RPM_BUILD_ROOT
 chrpath --delete $RPM_BUILD_ROOT%{_bindir}/ffmpegthumbnailer
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root,-)
@@ -62,17 +57,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/ffmpegthumbnailer
 %{_libdir}/libffmpegthumbnailer.so.4*
 %{_mandir}/man1/ffmpegthumbnailer.1.gz
+# gnome thumbnailer registration
+%dir %{_datadir}/thumbnailers
+%{_datadir}/thumbnailers/ffmpegthumbnailer.thumbnailer
 
 %files devel
 %defattr(-,root,root,-)
 %{_libdir}/libffmpegthumbnailer.so
-%{_libdir}/pkgconfig/lib%{name}.pc
-%dir %{_includedir}/libffmpegthumbnailer
-%{_includedir}/libffmpegthumbnailer/*.h
+%{_libdir}/pkgconfig/libffmpegthumbnailer.pc
+%{_includedir}/libffmpegthumbnailer/
+
 
 %changelog
-* Tue Jun 26 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.0.7-5
-- Rebuilt for FFmpeg
+* Wed Aug 29 2012 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.8-1
+- 2.0.8
 
 * Fri Mar 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.0.7-4
 - Rebuilt for c++ ABI breakage
