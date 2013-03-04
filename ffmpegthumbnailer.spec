@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
 Version:        2.0.8
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Mar 04 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.8-3
+- Rebuilt for F-19 Features
+
 * Sat Nov 24 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.0.8-2
 - Rebuilt for FFmpeg 1.0
 
