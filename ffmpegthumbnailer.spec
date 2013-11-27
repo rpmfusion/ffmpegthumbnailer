@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
 Version:        2.0.8
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
@@ -8,6 +8,7 @@ License:        GPLv2+
 URL:            http://code.google.com/p/ffmpegthumbnailer/
 Source0:        http://ffmpegthumbnailer.googlecode.com/files/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Patch0:         ffmpegthumbnailer-2.0.8-memcpy.patch
 
 BuildRequires:  ffmpeg-devel, libpng-devel, libjpeg-devel
 BuildRequires:  chrpath, automake, autoconf
@@ -27,6 +28,7 @@ development package.
 
 %prep
 %setup -q
+%patch0 -p1 -b .ffmpegthumbnailer-2.0.8-memcpy
 chmod -x README INSTALL COPYING AUTHORS
 
 %build
@@ -69,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Nov 27 2013 Leigh Scott <leigh123linux@googlemail.com> - 2.0.8-7
+- fix compile error
+
 * Wed Oct 02 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.8-6
 - Rebuilt
 
