@@ -1,18 +1,16 @@
 Name:           ffmpegthumbnailer
-Version:        2.0.8
-Release:        11%{?dist}
+Version:        2.0.9
+Release:        1%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://code.google.com/p/ffmpegthumbnailer/
-Source0:        http://ffmpegthumbnailer.googlecode.com/files/%{name}-%{version}.tar.gz
+Source0:        https://bitbucket.org/mtuominen/fedora/src/49e8ed786ec5813f6b0ca53eb96d7e8dceb2e81f/SOURCES/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Patch0:         ffmpegthumbnailer-2.0.8-memcpy.patch
 
 BuildRequires:  ffmpeg-devel, libpng-devel, libjpeg-devel
-BuildRequires:  chrpath, automake, autoconf
-
+BuildRequires:  chrpath, automake, autoconf, libtool, gcc-c++
 
 %description
 This video thumbnailer can be used to create thumbnails for your video files.
@@ -28,15 +26,15 @@ development package.
 
 %prep
 %setup -q
-%patch0 -p1 -b .ffmpegthumbnailer-2.0.8-memcpy
 chmod -x README INSTALL COPYING AUTHORS
 
 %build
+./autogen.sh
 %configure --enable-png \
            --enable-jpeg \
            --disable-static \
            --enable-gio \
-	   --enable-thumbnailer
+           --enable-thumbnailer
 
 make %{?_smp_mflags}
 
@@ -44,7 +42,7 @@ make %{?_smp_mflags}
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
-chrpath --delete $RPM_BUILD_ROOT%{_bindir}/ffmpegthumbnailer
+#chrpath --delete $RPM_BUILD_ROOT%%{_bindir}/ffmpegthumbnailer
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 %clean
@@ -71,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Apr 09 2015 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.9-1
+- 2.0.9
+
 * Sun Oct 19 2014 Sérgio Basto <sergio@serjux.com> - 2.0.8-11
 - Rebuilt for FFmpeg 2.4.3
 
