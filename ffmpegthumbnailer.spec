@@ -1,16 +1,16 @@
 Name:           ffmpegthumbnailer
-Version:        2.0.9
+Version:        2.1.1
 Release:        1%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://code.google.com/p/ffmpegthumbnailer/
-Source0:        https://bitbucket.org/mtuominen/fedora/src/49e8ed786ec5813f6b0ca53eb96d7e8dceb2e81f/SOURCES/%{name}-%{version}.tar.gz
+Source0:        https://github.com/dirkvdb/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  ffmpeg-devel, libpng-devel, libjpeg-devel
-BuildRequires:  chrpath, automake, autoconf, libtool, gcc-c++
+BuildRequires:  chrpath, cmake, gcc-c++
 
 %description
 This video thumbnailer can be used to create thumbnails for your video files.
@@ -29,12 +29,7 @@ development package.
 chmod -x README INSTALL COPYING AUTHORS
 
 %build
-./autogen.sh
-%configure --enable-png \
-           --enable-jpeg \
-           --disable-static \
-           --enable-gio \
-           --enable-thumbnailer
+%cmake -DENABLE_GIO=ON -DENABLE_THUMBNAILER=ON .
 
 make %{?_smp_mflags}
 
@@ -69,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Jun 25 2016 Leigh Scott <leigh123linux@googlemail.com> - 2.1.1-1
+- 2.1.1
+
 * Thu Apr 09 2015 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.9-1
 - 2.0.9
 
