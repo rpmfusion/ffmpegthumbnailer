@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
 Version:        2.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
@@ -64,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Jul 30 2016 Julian Sikorski <belegdol@fedoraproject.org> - 2.1.1-2
+- Rebuilt for ffmpeg-3.1.1
+
 * Sat Jun 25 2016 Leigh Scott <leigh123linux@googlemail.com> - 2.1.1-1
 - 2.1.1
 
