@@ -1,13 +1,12 @@
 Name:           ffmpegthumbnailer
-Version:        2.1.1
-Release:        2%{?dist}
+Version:        2.1.2
+Release:        1%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://code.google.com/p/ffmpegthumbnailer/
-Source0:        https://github.com/dirkvdb/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0:        https://github.com/dirkvdb/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  ffmpeg-devel, libpng-devel, libjpeg-devel
 BuildRequires:  chrpath, cmake, gcc-c++
@@ -31,24 +30,20 @@ chmod -x README INSTALL COPYING AUTHORS
 %build
 %cmake -DENABLE_GIO=ON -DENABLE_THUMBNAILER=ON .
 
-make %{?_smp_mflags}
+%make_build
 
  
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
 #chrpath --delete $RPM_BUILD_ROOT%%{_bindir}/ffmpegthumbnailer
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
-%doc README COPYING AUTHORS
+%doc README AUTHORS
+%license COPYING
 %{_bindir}/ffmpegthumbnailer
 %{_libdir}/libffmpegthumbnailer.so.4*
 %{_mandir}/man1/ffmpegthumbnailer.1.gz
@@ -57,13 +52,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/thumbnailers/ffmpegthumbnailer.thumbnailer
 
 %files devel
-%defattr(-,root,root,-)
 %{_libdir}/libffmpegthumbnailer.so
 %{_libdir}/pkgconfig/libffmpegthumbnailer.pc
 %{_includedir}/libffmpegthumbnailer/
 
 
 %changelog
+* Wed Aug 24 2016 Sérgio Basto <sergio@serjux.com> - 2.1.2-1
+- Update ffmpegthumbnailer to 2.1.2
+- Clean up spec, add license tag.
+- Fix changelog dates.
+
 * Sat Jul 30 2016 Julian Sikorski <belegdol@fedoraproject.org> - 2.1.1-2
 - Rebuilt for ffmpeg-3.1.1
 
@@ -125,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Feb 13 2011 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.6-2
 - patch NULL reference to make rawhide build
 
-* Fri Jan 04 2011 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.6-1
+* Fri Feb 04 2011 Magnus Tuominen <magnus.tuominen@gmail.com> - 2.0.6-1
 - version bump
 - patch libdl link issue
 - add BR: automake and autoconf
@@ -143,7 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sun May 16 2010 Magnus Tuominen <magnus.tuominen@gmail.com> 2.0.2-1
 - version bump
 
-* Sat Apr 19 2010 Magnus Tuominen <magnus.tuominen@gmail.com> 2.0.1-1
+* Mon Apr 19 2010 Magnus Tuominen <magnus.tuominen@gmail.com> 2.0.1-1
 - version bump
 - libspatch.patch merged upstream, issue 59
 
