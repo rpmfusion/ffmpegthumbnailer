@@ -1,22 +1,22 @@
 Name:           ffmpegthumbnailer
 Version:        2.2.0
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
-Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://code.google.com/p/ffmpegthumbnailer/
 Source0:        https://github.com/dirkvdb/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  ffmpeg-devel, libpng-devel, libjpeg-devel
-BuildRequires:  chrpath, cmake, gcc-c++
+BuildRequires:  chrpath, cmake3, gcc-c++
+%{?el7:BuildRequires: epel-rpm-macros}
+
 
 %description
 This video thumbnailer can be used to create thumbnails for your video files.
 
 %package devel
 Summary:        Headers and libraries for building apps that use ffmpegthumbnailer
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -28,7 +28,7 @@ development package.
 chmod -x README INSTALL COPYING AUTHORS
 
 %build
-%cmake -DENABLE_GIO=ON -DENABLE_THUMBNAILER=ON .
+%cmake3 -DENABLE_GIO=ON -DENABLE_THUMBNAILER=ON .
 
 %make_build
 
@@ -38,8 +38,7 @@ chmod -x README INSTALL COPYING AUTHORS
 #chrpath --delete $RPM_BUILD_ROOT%%{_bindir}/ffmpegthumbnailer
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %files
 %doc README AUTHORS
@@ -58,6 +57,11 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Dec 08 2018 Antonio Trande <sagitter@fedoraproject.org> - 2.2.0-7
+- Rebuild for ffmpeg-3.4.5 on el7
+- Use ldconfig_scriptlets
+- Use CMake3
+
 * Thu Jul 26 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.2.0-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
