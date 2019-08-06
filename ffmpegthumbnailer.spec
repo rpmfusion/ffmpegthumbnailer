@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
 Version:        2.2.0
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 License:        GPLv2+
@@ -57,6 +57,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Aug 06 2019 Leigh Scott <leigh123linux@gmail.com> - 2.2.0-9
+- Rebuild for new ffmpeg version
+
 * Mon Mar 04 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.2.0-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
