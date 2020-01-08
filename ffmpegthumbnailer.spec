@@ -1,14 +1,19 @@
 Name:           ffmpegthumbnailer
-Version:        2.2.0
-Release:        9%{?dist}
+Version:        2.2.2
+Release:        1%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 License:        GPLv2+
-URL:            http://code.google.com/p/ffmpegthumbnailer/
-Source0:        https://github.com/dirkvdb/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+URL:            https://github.com/dirkvdb/%{name}
+Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Patch0:         %{url}/commit/339ebc5aa634b4680585d7c36317ab6f162ca2a9.patch#/fix_object_target.patch
 
-BuildRequires:  ffmpeg-devel, libpng-devel, libjpeg-devel
-BuildRequires:  chrpath, cmake3, gcc-c++
+BuildRequires:  ffmpeg-devel
+BuildRequires:  libpng-devel
+BuildRequires:  libjpeg-devel
+BuildRequires:  chrpath
+BuildRequires:  cmake3
+BuildRequires:  gcc-c++
 %{?el7:BuildRequires: epel-rpm-macros}
 
 
@@ -24,7 +29,7 @@ This video thumbnailer can be used to create thumbnails for your video files,
 development package.
 
 %prep
-%setup -q
+%autosetup -p1
 chmod -x README INSTALL COPYING AUTHORS
 
 %build
@@ -57,6 +62,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Wed Jan 08 2020 Leigh Scott <leigh123linux@googlemail.com> - 2.2.2-1
+- Update ffmpegthumbnailer to 2.2.2
+
 * Tue Aug 06 2019 Leigh Scott <leigh123linux@gmail.com> - 2.2.0-9
 - Rebuild for new ffmpeg version
 
