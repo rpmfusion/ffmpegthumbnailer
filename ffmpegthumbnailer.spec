@@ -1,12 +1,13 @@
 Name:           ffmpegthumbnailer
 Version:        2.2.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 License:        GPLv2+
 URL:            https://github.com/dirkvdb/%{name}
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:         %{url}/commit/339ebc5aa634b4680585d7c36317ab6f162ca2a9.patch#/fix_object_target.patch
+Patch1:         add_audio_cover.patch
 
 BuildRequires:  ffmpeg-devel
 BuildRequires:  libpng-devel
@@ -62,6 +63,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Wed Jan 08 2020 Leigh Scott <leigh123linux@googlemail.com> - 2.2.2-2
+- Add audio covers to mime types
+
 * Wed Jan 08 2020 Leigh Scott <leigh123linux@googlemail.com> - 2.2.2-1
 - Update ffmpegthumbnailer to 2.2.2
 
