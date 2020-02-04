@@ -1,6 +1,6 @@
 Name:           ffmpegthumbnailer
 Version:        2.2.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 License:        GPLv2+
@@ -63,6 +63,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Feb 04 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.2.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Wed Jan 08 2020 Leigh Scott <leigh123linux@googlemail.com> - 2.2.2-2
 - Add audio covers to mime types
 
