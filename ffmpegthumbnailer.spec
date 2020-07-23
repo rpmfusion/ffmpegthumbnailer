@@ -16,6 +16,7 @@ BuildRequires:  libpng-devel
 BuildRequires:  libjpeg-devel
 BuildRequires:  chrpath
 BuildRequires:  cmake3
+BuildRequires:  ninja-build
 BuildRequires:  gcc-c++
 %{?el7:BuildRequires: epel-rpm-macros}
 
@@ -36,7 +37,7 @@ development package.
 chmod -x README INSTALL COPYING AUTHORS
 
 %build
-%cmake3 -DENABLE_GIO=ON -DENABLE_THUMBNAILER=ON .
+%cmake3 -DENABLE_GIO=ON -DENABLE_THUMBNAILER=ON -GNinja
 
 %cmake3_build
 
