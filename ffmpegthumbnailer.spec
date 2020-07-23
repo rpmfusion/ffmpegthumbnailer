@@ -1,6 +1,8 @@
+%undefine __cmake_in_source_build
+
 Name:           ffmpegthumbnailer
 Version:        2.2.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 License:        GPLv2+
@@ -36,11 +38,11 @@ chmod -x README INSTALL COPYING AUTHORS
 %build
 %cmake3 -DENABLE_GIO=ON -DENABLE_THUMBNAILER=ON .
 
-%make_build
+%cmake3_build
 
  
 %install
-%make_install
+%cmake3_install
 #chrpath --delete $RPM_BUILD_ROOT%%{_bindir}/ffmpegthumbnailer
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
@@ -63,6 +65,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Jul 23 2020 Leigh Scott <leigh123linux@gmail.com> - 2.2.2-5
+- Improve compatibility with new CMake macro
+
 * Sat Feb 22 2020 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 2.2.2-4
 - Rebuild for ffmpeg-4.3 git
 
