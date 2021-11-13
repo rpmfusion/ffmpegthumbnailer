@@ -1,24 +1,23 @@
-%undefine __cmake_in_source_build
+%global commit  d92e191dd793b12cee0a0f685f5a8d8252988399
+%global date 20210902
+%global shortcommit0 %(c=%{commit}; echo ${c:0:7})
 
 Name:           ffmpegthumbnailer
-Version:        2.2.2
-Release:        10%{?dist}
+Version:        2.2.3
+Release:        0.1%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 License:        GPLv2+
 URL:            https://github.com/dirkvdb/%{name}
-Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-Patch0:         %{url}/commit/339ebc5aa634b4680585d7c36317ab6f162ca2a9.patch#/fix_object_target.patch
-Patch1:         add_audio_cover.patch
+Source0:        %{url}/archive/%{commit}/%{name}-%{commit}.tar.gz
+Patch0:         add_audio_cover.patch
 
 BuildRequires:  ffmpeg-devel
 BuildRequires:  libpng-devel
 BuildRequires:  libjpeg-devel
-BuildRequires:  chrpath
-BuildRequires:  cmake3
+BuildRequires:  cmake
 BuildRequires:  ninja-build
 BuildRequires:  gcc-c++
-%{?el7:BuildRequires: epel-rpm-macros}
 
 
 %description
@@ -33,18 +32,17 @@ This video thumbnailer can be used to create thumbnails for your video files,
 development package.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-%{commit}
 chmod -x README INSTALL COPYING AUTHORS
 
 %build
-%cmake3 -DENABLE_GIO=ON -DENABLE_THUMBNAILER=ON -GNinja
+%cmake -DENABLE_GIO=ON -DENABLE_THUMBNAILER=ON -GNinja
 
-%cmake3_build
+%cmake_build
 
  
 %install
-%cmake3_install
-#chrpath --delete $RPM_BUILD_ROOT%%{_bindir}/ffmpegthumbnailer
+%cmake_install
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 %ldconfig_scriptlets
@@ -66,6 +64,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Nov 13 2021 Leigh Scott <leigh123linux@gmail.com> - 2.2.3-0.1.20210902gitd92e191
+- Update to git snapshot
+
 * Thu Nov 11 2021 Leigh Scott <leigh123linux@gmail.com> - 2.2.2-10
 - Rebuilt for new ffmpeg snapshot
 
