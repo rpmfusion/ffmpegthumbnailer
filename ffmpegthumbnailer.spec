@@ -11,6 +11,7 @@ License:        GPLv2+
 URL:            https://github.com/dirkvdb/%{name}
 Source0:        %{url}/archive/%{commit}/%{name}-%{commit}.tar.gz
 Patch0:         add_audio_cover.patch
+Patch1:         gcc12_fix.patch
 
 BuildRequires:  ffmpeg-devel
 BuildRequires:  libpng-devel
