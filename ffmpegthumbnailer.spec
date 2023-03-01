@@ -4,7 +4,7 @@
 
 Name:           ffmpegthumbnailer
 Version:        2.2.3
-Release:        0.3%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Release:        0.4%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 License:        GPLv2+
@@ -65,6 +65,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Wed Mar 01 2023 Leigh Scott <leigh123linux@gmail.com> - 2.2.3-0.4.20210902gitd92e191
+- Rebuild for new ffmpeg
+
 * Sun Aug 07 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.2.3-0.3.20210902gitd92e191
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
