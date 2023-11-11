@@ -1,17 +1,16 @@
-%global commit  d92e191dd793b12cee0a0f685f5a8d8252988399
-%global date 20210902
+%global commit  aa8a6f99c5b9bd5ecdc50fda2b5a48de1eaefbde
+%global date 20231018
 %global shortcommit0 %(c=%{commit}; echo ${c:0:7})
 
 Name:           ffmpegthumbnailer
 Version:        2.2.3
-Release:        0.5%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Release:        0.6%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 License:        GPLv2+
 URL:            https://github.com/dirkvdb/%{name}
 Source0:        %{url}/archive/%{commit}/%{name}-%{commit}.tar.gz
 Patch0:         add_audio_cover.patch
-Patch1:         gcc12_fix.patch
 
 BuildRequires:  ffmpeg-devel
 BuildRequires:  libpng-devel
@@ -65,6 +64,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Nov 11 2023 Sérgio Basto <sergio@serjux.com> - 2.2.3-0.6.20221021gite0bf01d
+- Update latest git commits with GCC-13 fix
+
 * Wed Aug 02 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.2.3-0.5.20210902gitd92e191
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
 
