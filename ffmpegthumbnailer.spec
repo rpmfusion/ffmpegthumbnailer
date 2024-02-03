@@ -1,10 +1,10 @@
-%global commit  aa8a6f99c5b9bd5ecdc50fda2b5a48de1eaefbde
-%global date 20231018
+%global commit 1b5a77983240bcf00a4ef7702c07bcd8f4e5f97c
+%global date 20240104
 %global shortcommit0 %(c=%{commit}; echo ${c:0:7})
 
 Name:           ffmpegthumbnailer
 Version:        2.2.3
-Release:        0.6%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Release:        0.7%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Lightweight video thumbnailer that can be used by file managers
 
 License:        GPLv2+
@@ -64,6 +64,10 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Feb 03 2024 Sérgio Basto <sergio@serjux.com> - 2.2.3-0.7.20240104git1b5a779
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
+- Update latest git version
+
 * Sat Nov 11 2023 Sérgio Basto <sergio@serjux.com> - 2.2.3-0.6.20221021gite0bf01d
 - Update latest git commits with GCC-13 fix
 
